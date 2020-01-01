@@ -1,0 +1,74 @@
+def relaxation_method2(func, xo, tol, max_it):
+    """ Performs the relaxation method to find a fixed-point for `func`,
+        given the initial guess `xo`. The relaxation process is carried out for
+        `num_it` steps.
+        
+        Parameters
+        ----------
+        func : Callable[[float], float]
+            The function whose fixed point is being found.
+        xo : float
+            The initial "guess" value.
+        tol : float
+            A positive value that sets the maximum permissable error
+            in the final fixed-point estimate.
+        max_it : int
+            The maximum number relaxation-guesses (i.e. the length of the
+            list you are creating) allotted before the 
+            algorithm will end. The length of the list you return should
+            never exceed this number.
+            
+        Returns
+        -------
+        List[float]
+            A list of the initial guess, and all of the subsequent guesses generated
+            by the relaxation method. """
+    # student code goes here        
+    
+    guess = []
+    index = 0
+    error = 0
+    count = 1
+    
+    if max_it == 1:            # count is equal to 1 and max_it is equal to 1
+        guess.append(xo)       # adds intial num to list, guess
+        return(guess)          # ends the program         
+                               # if count is equal to 1 and max_it is greater than 2
+    if max_it == 2:
+        x = func(xo)
+        guess.append(xo)
+        guess.append(x)        # guess now has two index entries     
+        count +=1 
+        return(guess) 
+    
+    if max_it== 3:
+        x = func(xo)
+        guess.append(xo)
+        guess.append(x)        # guess now has two index entries     
+        count +=1
+        x = func(x)
+        guess.append(x)
+        count +=1
+        return(guess)
+        
+                
+    elif max_it > 3:
+        x = func(xo)
+        guess.append(xo)
+        guess.append(x)        # guess now has two index entries     
+        count +=1  
+        x = func(x)
+        guess.append(x)
+        count += 1
+        
+        while count < max_it:          # loops while count is less than max_it
+            # guess counter equals 3 so error bound equation can be done
+            error = abs((guess[index + 2] - guess[index + 1])**2 / (2 * guess[index + 1] - guess[index] - guess[index + 2]))
+            if error < tol:
+                return(guess)
+            x = func(x)
+            guess.append(x)
+            count+=1
+            index += 1 
+            
+    return(guess)
