@@ -1,0 +1,37 @@
+def relaxation_method1(func, xo, num_it):
+    """ Performs the relaxation method to find a fixed-point for `func`,
+        given the initial guess `xo`. The relaxation process is carried out for
+        `num_it` steps.
+        
+        Parameters
+        ----------
+        func : Callable[[float], float]
+            The function whose fixed point is being found.
+        xo : float
+            The initial "guess" value.
+        num_it : int
+            The number of relaxation-iterations to perform.
+        
+        Returns
+        -------
+        List[float]
+            A list of the initial guess, and all of the subsequent guesses generated
+            by the relaxation method. """
+    # student code goes here
+    guess = []
+    count = 0
+    if count == num_it:
+        guess.append(xo)
+        return(guess)
+    elif count != num_it:  
+        x = func(xo)
+        guess.append(xo)
+        guess.append(x)
+        count +=1
+    
+        while count < num_it:
+            x = func(x)
+            guess.append(x)
+            count+=1
+    
+    return(guess)
