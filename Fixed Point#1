@@ -35,3 +35,4 @@ def relaxation_method1(func, xo, num_it):
             count+=1
     
     return(guess)
+vim: syntax=python
