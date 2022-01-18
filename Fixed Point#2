@@ -72,3 +72,4 @@ def relaxation_method2(func, xo, tol, max_it):
             index += 1 
             
     return(guess)
+vim: syntax=python
